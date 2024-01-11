@@ -1,0 +1,71 @@
+# Importar Bibliotecas:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Carregar os Dados:
+
+# DataFrame
+dados = {
+    'Dias': ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    'Horas Trabalhadas': [8, 7, 8, 6, 7, 8, 5],
+    'Bugs Corrigidos': [3, 1, 2, 0, 4, 1, 0],
+    'Tarefas Concluídas': [5, 4, 6, 3, 7, 5, 2]
+}
+
+df = pd.DataFrame(dados)
+# Análise Exploratória:
+
+# Visualizando as primeiras linhas do DataFrame
+df.head()
+# Estatísticas Descritivas:
+# Calculando estatísticas descritivas
+df.describe()
+# Visualizações:
+# Gráfico de linhas para Horas Trabalhadas, Bugs Corrigidos e Tarefas Concluídas
+plt.figure(figsize=(10, 6))
+sns.lineplot(x='Dias', y='Horas Trabalhadas', data=df, label='Horas Trabalhadas')
+sns.lineplot(x='Dias', y='Bugs Corrigidos', data=df, label='Bugs Corrigidos')
+sns.lineplot(x='Dias', y='Tarefas Concluídas', data=df, label='Tarefas Concluídas')
+plt.title('Progresso Diário')
+plt.xlabel('Dias')
+plt.ylabel('Quantidade')
+plt.legend()
+plt.show()
+
+# Total de Horas Trabalhadas e Média Diária de Horas Trabalhadas
+
+total_horas = df['Horas Trabalhadas'].sum()
+media_diaria_horas = df['Horas Trabalhadas'].mean()
+
+print(f"Total de Horas Trabalhadas: {total_horas}")
+print(f"Média Diária de Horas Trabalhadas: {media_diaria_horas:.2f}")
+
+# Total de Bugs Corrigidos e Média Diária de Bugs Corrigidos
+
+total_bugs = df['Bugs Corrigidos'].sum()
+media_diaria_bugs = df['Bugs Corrigidos'].mean()
+
+print(f"Total de Bugs Corrigidos: {total_bugs}")
+print(f"Média Diária de Bugs Corrigidos: {media_diaria_bugs:.2f}")
+
+# Total de Tarefas Concluídas e Média Diária de Tarefas Concluídas
+
+total_tarefas = df['Tarefas Concluídas'].sum()
+media_diaria_tarefas = df['Tarefas Concluídas'].mean()
+print(f"Total de Tarefas Concluídas: {total_tarefas}")
+print(f"Média Diária de Tarefas Concluídas: {media_diaria_tarefas:.2f}")
+
+# Produtividade Diária (Tarefas Concluídas por Hora)
+
+df['Produtividade Diária'] = df['Tarefas Concluídas'] / df['Horas Trabalhadas']
+
+# Gráfico de barras para Produtividade Diária
+plt.figure(figsize=(8, 5))
+sns.barplot(x='Dias', y='Produtividade Diária', data=df, color='skyblue')
+plt.title('Produtividade Diária (Tarefas por Hora)')
+plt.xlabel('Dias')
+plt.ylabel('Produtividade')
+plt.show()
+# Conclusões e Insights:
